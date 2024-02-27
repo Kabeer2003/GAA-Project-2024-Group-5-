@@ -1,5 +1,15 @@
 ---
 title: "GAA Project Group 5"
+
+authors: Aidan, Gerald, Kabeer
+date: "February 28, 2024"
+
+execute: 
+  eval: true
+  echo: true
+  message: false
+  warning: false
+  freeze: true
 ---
 
 This is a Quarto website.

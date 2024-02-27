@@ -1,0 +1,14 @@
+{
+  "hash": "50eaa65f870be9510bf1c242a861750d",
+  "result": {
+    "markdown": "---\ntitle: \"GAA Project Group 5\"\n\nauthors: Aidan, Gerald, Kabeer\ndate: \"February 28, 2024\"\n\nexecute: \n  eval: true\n  echo: true\n  message: false\n  warning: false\n  freeze: true\n---\n\n\nThis is a Quarto website.\n\nTo learn more about Quarto websites visit <https://quarto.org/docs/websites>.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 2\n```\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
