@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "GAA Project Group 5"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Project Proposal
+      - about.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+
