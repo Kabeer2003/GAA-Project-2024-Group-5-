@@ -1,5 +1,5 @@
 ---
-title: "GAA Project Group 5"
+title: "GAA Group 5: Culinary Crossroads"
 
 authors: Aidan, Gerald, Kabeer
 date: "February 28, 2024"
