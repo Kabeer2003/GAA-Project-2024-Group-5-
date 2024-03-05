@@ -5,15 +5,16 @@ website:
   title: "GAA Project Group 5"
   navbar:
     left:
-      - href: index.qmd
-        text: Project Proposal
-      - about.qmd
+      - text: "Project Proposal"
+        href: "Proposal/proposal.html"
+    right:
+      - text: "Home"
+        href: "index.html"
 
 format:
   html:
     theme: cosmo
-    css: styles.css
+    css: "styles.css"
     toc: true
 
 editor: visual
-

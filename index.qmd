@@ -12,7 +12,7 @@ execute:
   freeze: true
 ---
 
-We are from IS415 G1 T5 (better known as **OnlyTheGoodStuff**).
+We are from IS415 G1 T5 (better known as **CulinaryCrossroads**).
 
 Our project is on Geospatial Recommendations for Culinary Delights in Singapore
 
