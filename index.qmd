@@ -2,7 +2,7 @@
 title: "GAA Group 5: Culinary Crossroads"
 
 authors: Aidan, Gerald, Kabeer
-date: "February 28, 2024"
+date: "`r Sys.Date()`"
 
 execute: 
   eval: true
@@ -12,10 +12,8 @@ execute:
   freeze: true
 ---
 
-This is a Quarto website.
+We are from IS415 G1 T5 (better known as **OnlyTheGoodStuff**).
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Our project is on Geospatial Recommendations for Culinary Delights in Singapore
 
-```{r}
-1 + 1
-```
+Here is the link to our proposal site <https://quarto.org/docs/websites>.

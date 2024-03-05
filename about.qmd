@@ -1,9 +1,23 @@
 ---
-title: "About"
+title: "GAA Group 5: About"
+
+authors: Aidan, Gerald, Kabeer
+date: "`r Sys.Date()`"
+
+execute: 
+  eval: true
+  echo: true
+  message: false
+  warning: false
+  freeze: true
 ---
 
-About this site
+About this site:
 
-```{r}
-1 + 1
-```
+About the team:
+
+Aidan
+
+Kabeer
+
+Gerald
