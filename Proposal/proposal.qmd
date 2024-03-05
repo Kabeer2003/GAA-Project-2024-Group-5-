@@ -18,11 +18,11 @@ Culinary Crossroads is an innovative platform designed to revolutionize the culi
 
 At its core, the platform identifies the user's current position and cross-references it with a comprehensive database of eateries, ranging from time-honoured hawker centers to avant-garde gourmet restaurants.
 
-A distinctive feature of Singapore Bites is its capacity to analyze geographic data to highlight areas rich in culinary diversity. Whether a user craves local delights or international fare, the platform visually represents regions with high concentrations of selected cuisine types, facilitating informed decision-making.
+A distinctive feature of Culinary Crossroads is its capacity to analyze geographic data to highlight areas rich in culinary diversity. Whether a user craves local delights or international fare, the platform visually represents regions with high concentrations of selected cuisine types, facilitating informed decision-making.
 
-Singapore Bites also serves as a social platform, encouraging users to share their dining experiences, thus fostering a community of food enthusiasts who contribute to the real-time review ecosystem.
+Culinary Crossroads also serves as a social platform, encouraging users to share their dining experiences, thus fostering a community of food enthusiasts who contribute to the real-time review ecosystem.
 
-In summary, Singapore Bites positions itself as not just a tool but an indispensable companion locals and tourists seeking to navigate Singapore's vibrant culinary scene. It's where technology meets taste, and where every recommendation is an invitation to embark on a gastronomic adventure tailored to your palate.
+In summary, Culinary Crossroads positions itself as not just a tool but an indispensable companion locals and tourists seeking to navigate Singapore's vibrant culinary scene. It's where technology meets taste, and where every recommendation is an invitation to embark on a gastronomic adventure tailored to your palate.
 
 -   Leverage geospatial analytics to create a user-friendly platform that recommends the best food options in Singapore based on individual preferences, location, and real-time reviews.
 
