@@ -15,5 +15,3 @@ execute:
 We are from IS415 G1 T5 (better known as **CulinaryCrossroads**).
 
 Our project is on Geospatial Recommendations for Culinary Delights in Singapore
-
-Here is the link to our proposal site <https://quarto.org/docs/websites>.
