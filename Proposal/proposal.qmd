@@ -17,7 +17,6 @@ execute:
 Culinary Crossroads aims to utilize spatial point patterns to enhance exploration of hawker centres in Singapore. Objectives include creating comprehensive maps of hawker centre locations, identifying regions with higher concentrations, and providing individual maps for detailed analysis. Integration of a user-friendly Shiny app allows users to indicate preferred regions for exploration. Additionally, the project categorizes hawker centre food by cuisine types and dietary preferences, enabling personalized food recommendations aligned with user tastes and dietary restrictions. Overall, the objectives seek to provide a tailored and user-friendly platform for discovering culinary delights in Singapore's vibrant hawker culture.
 
 ### Steps in this Project :
-
 -   Data Collection and Wrangling:
 
     -   Gather geospatial data on hawker centre locations, cuisine types, dietary types in Singapore.
