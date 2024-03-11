@@ -103,7 +103,16 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#our-objective" id="toc-our-objective" class="nav-link active" data-scroll-target="#our-objective">Our Objective:</a></li>
+  <li><a href="#steps-in-this-project" id="toc-steps-in-this-project" class="nav-link" data-scroll-target="#steps-in-this-project">Steps in this Project :</a></li>
+  <li><a href="#benefits" id="toc-benefits" class="nav-link" data-scroll-target="#benefits">Benefits:</a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -137,105 +146,57 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Our Objective:</p>
+<section id="our-objective" class="level3">
+<h3 class="anchored" data-anchor-id="our-objective">Our Objective:</h3>
+<p>Culinary Crossroads aims to utilize spatial point patterns to enhance exploration of hawker centres in Singapore. Objectives include creating comprehensive maps of hawker centre locations, identifying regions with higher concentrations, and providing individual maps for detailed analysis. Integration of a user-friendly Shiny app allows users to indicate preferred regions for exploration. Additionally, the project categorizes hawker centre food by cuisine types and dietary preferences, enabling personalized food recommendations aligned with user tastes and dietary restrictions. Overall, the objectives seek to provide a tailored and user-friendly platform for discovering culinary delights in Singapore’s vibrant hawker culture.</p>
+</section>
+<section id="steps-in-this-project" class="level3">
+<h3 class="anchored" data-anchor-id="steps-in-this-project">Steps in this Project :</h3>
 <ul>
-<li><p>Leverage geospatial analytics to create a user-friendly platform that recommends the best food options in Singapore based on individual preferences, location, and real-time reviews.</p></li>
-<li><p>Users can get to see which area has the most number of eateries (based on the type of eateries / cuisine)</p></li>
-</ul>
-<p>Steps in this Project:</p>
+<li><p>Data Collection and Wrangling:</p>
 <ul>
-<li><p>Data Collection:</p>
-<ul>
-<li><p>Gather geospatial data on restaurant locations, cuisine types, ratings, and reviews in Singapore.</p></li>
-<li><p>Integrate data from popular food review platforms, social media, and local food blogs.</p></li>
+<li>Gather geospatial data on hawker centre locations, cuisine types, dietary types in Singapore.</li>
 </ul></li>
-<li><p>User Profiling:</p>
+<li><p>Building the functions</p>
 <ul>
-<li><p>Develop a user profiling system to understand individual preferences, dietary restrictions, and past dining experiences.</p></li>
-<li><p>Allow users to customize their profiles and preferences.</p></li>
+<li>Function 1: Spatial Point Patterns for Hawker Centres in SG:
+<ul>
+<li>Map Creation: Develop a map displaying all hawker centres in Singapore.</li>
+<li>Regional Analysis: Highlight regions with a higher concentration of hawker centres.</li>
+<li>Regional Maps: Provide individual maps for each region to further analyze hawker centre distribution.</li>
+<li>Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred region for hawker centre exploration.</li>
 </ul></li>
-<li><p>Geospatial Recommendations:</p>
+<li>Function 2: Spatial Point Patterns for Hawker Centre Food Based on Type of Food:
 <ul>
-<li><p>Implement geospatial analytics algorithms to recommend nearby restaurants based on the user’s location, cuisine preferences, and ratings.</p></li>
-<li><p>Use machine learning to personalize recommendations over time.</p></li>
+<li>Food Type Map: Create a map illustrating the types of food available at hawker centres, categorising them based on cuisine types.</li>
+<li>User Input: Develop a Shiny app interface for users to input their preferred food types, allowing for personalised food recommendations.</li>
 </ul></li>
-<li><p>Real-time Reviews and Ratings:</p>
+<li>Function 3: Spatial Point Patterns for Hawker Centre Food Based on Dietary Preferences:
 <ul>
-<li><p>Integrate real-time reviews and ratings from users and reputable food critics.</p></li>
-<li><p>Implement sentiment analysis to understand the overall satisfaction of diners.</p></li>
+<li>Dietary Options Map: Develop a map indicating hawker centres with specific dietary options such as halal, vegan, etc.</li>
+<li>User Preferences: Enable users to input their dietary preferences through a Shiny app, ensuring personalized recommendations aligned with their dietary restrictions.</li>
 </ul></li>
-<li><p>Culinary Diversity Mapping:</p>
-<ul>
-<li><p>Create a geospatial map highlighting the diversity of culinary options in different neighborhoods of Singapore.</p></li>
-<li><p>Identify food clusters and trending dining spots.</p></li>
-</ul></li>
-<li><p>Accessibility and Travel Time:</p>
-<ul>
-<li><p>Factor in travel time and accessibility from the user’s location to recommended restaurants.</p></li>
-<li><p>Optimize recommendations based on the user’s preferred mode of transportation.</p></li>
-</ul></li>
-<li><p>Special Events and Promotions:</p>
-<ul>
-<li><p>Integrate event data and promotions from restaurants, such as food festivals, happy hours, and special menus.</p></li>
-<li><p>Notify users of upcoming culinary events in their vicinity.</p></li>
-</ul></li>
-<li><p>Interactive Map and Navigation:</p>
-<ul>
-<li><p>Develop an interactive map that allows users to explore food options visually.</p></li>
-<li><p>Provide navigation features to guide users to their selected restaurants.</p></li>
-</ul></li>
-<li><p>User Engagement and Social Features:</p>
-<ul>
-<li><p>Implement social features, such as sharing favorite restaurants, creating foodie lists, and following other users.</p></li>
-<li><p>Encourage user-generated content to enhance the platform’s community aspect.</p></li>
-</ul></li>
-<li><p>Postal Presentation and App Demonstration:</p>
-<ul>
-<li><p>Present the project findings in a postal presentation, showcasing the effectiveness of geospatial analytics in providing personalized food recommendations.</p></li>
-<li><p>Demonstrate the mobile app and its features.</p></li>
 </ul></li>
 </ul>
-<p>Benefits:</p>
+</section>
+<section id="benefits" class="level3">
+<h3 class="anchored" data-anchor-id="benefits">Benefits:</h3>
 <ul>
-<li>This project brings together technology and culinary exploration, offering users a personalized and real-time guide to the best food experiences in Singapore. It promotes local businesses, enhances user experience, and fosters a vibrant foodie community.</li>
+<li>The project offers numerous benefits, including facilitating exploration of Singapore’s diverse hawker culture through user-friendly maps and personalized recommendations. By highlighting regions with higher concentrations of hawker centres and categorizing food options based on cuisine types and dietary preferences, users can easily discover culinary delights tailored to their tastes. The integration of a Shiny app enhances user engagement and interaction, allowing for seamless navigation and exploration of hawker centres. Ultimately, the project promotes cultural exploration, enhances user experience, and fosters a vibrant community of food enthusiasts in Singapore.</li>
 </ul>
-<p>So, you will be thinking where will we be getting our data ?</p>
+</section>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data Sources</h3>
+<p>Where can we find the data ?</p>
 <ul>
-<li><p>OpenStreetMap (OSM):</p>
-<ul>
-<li>OpenStreetMap is a collaborative project that provides free and editable geospatial data. You can extract data related to restaurant locations, types, and user reviews.</li>
-</ul></li>
-<li><p>Foursquare API:</p>
-<ul>
-<li>Foursquare offers an API that provides access to a wealth of location-based data, including details about restaurants, ratings, and user reviews. You can explore their developer platform for API access.</li>
-</ul></li>
-<li><p>Google Places API:</p>
-<ul>
-<li>Google Places API allows you to retrieve information about places, including restaurants. You can obtain details such as place names, addresses, ratings, and reviews.</li>
-</ul></li>
-<li><p>Yelp API:</p>
-<ul>
-<li>Yelp provides an API that allows you to access information about businesses, including restaurants. You can retrieve details like business names, addresses, ratings, and user reviews.</li>
-</ul></li>
-<li><p>Zomato API:</p>
-<ul>
-<li>Zomato’s API provides data on restaurants, including details like location, cuisine types, ratings, and reviews. You may need to sign up for an API key to access their data.</li>
-</ul></li>
-<li><p>TripAdvisor API:</p>
-<ul>
-<li>TripAdvisor offers an API that provides information on restaurants, attractions, and reviews. You can explore their developer portal for API access.</li>
-</ul></li>
-<li><p>Singapore Open Data:</p>
-<ul>
-<li>Check if the Singapore government or local authorities provide open datasets related to food establishments, tourism, or geospatial data. Some governments offer open data platforms with valuable information.</li>
-</ul></li>
-<li><p>Local Food Blogs and Websites:</p>
-<ul>
-<li>Explore local food blogs, websites, and forums that may have curated lists of restaurants, reviews, and recommendations. You can manually extract information or contact bloggers for collaboration.</li>
-</ul></li>
+<li>OpenStreetMap (OSM): OpenStreetMap is a collaborative project that provides free and editable geospatial data. You can extract data related to restaurant locations, types, and user reviews.</li>
+<li>Singapore Open Data (data.gov.sg): Hawker Centre Locations (kml)</li>
+<li>DBS PayLah: Dataset with the list of stalls in each hawker centre</li>
+<li>Google Places API: Google Places API allows you to retrieve information about places, including restaurants. You can obtain details such as place names, addresses, ratings, and reviews.</li>
 </ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
