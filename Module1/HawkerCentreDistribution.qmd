@@ -1,1 +1,9 @@
+---
+title: "Module 1: 1st Order Analysis - Density and Distribution of Hawker Centres"
+author: "Gerald Lim"
 
+execute:
+  warning: false
+  freeze: false
+date: "`r Sys.Date()`"
+---
