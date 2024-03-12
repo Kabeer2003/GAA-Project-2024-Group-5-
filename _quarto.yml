@@ -7,6 +7,13 @@ website:
     left:
       - text: "Project Proposal"
         href: "Proposal/proposal.html"
+      - text: "Hawker Centre Distribution"
+        href: "Module1/HawkerCentreDistribution.html"
+      - text: "Hawker Centre Proximity"
+        href: "Module2/HawkerCentreProximity.html"
+      - text: "Hawker Centre Accessibility"
+        href: "Module3/HawkerCentreAccessibility.html"
+
     right:
       - text: "Home"
         href: "index.html"
