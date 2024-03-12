@@ -17,23 +17,33 @@ execute:
 Culinary Crossroads aims to utilize spatial point patterns to enhance exploration of hawker centres in Singapore. Objectives include creating comprehensive maps of hawker centre locations, identifying regions with higher concentrations, and providing individual maps for detailed analysis. Integration of a user-friendly Shiny app allows users to indicate preferred regions for exploration. Additionally, the project categorizes hawker centre food by cuisine types and dietary preferences, enabling personalized food recommendations aligned with user tastes and dietary restrictions. Overall, the objectives seek to provide a tailored and user-friendly platform for discovering culinary delights in Singapore's vibrant hawker culture.
 
 ### Steps in this Project :
+
 -   Data Collection and Wrangling:
 
     -   Gather geospatial data on hawker centre locations, cuisine types, dietary types in Singapore.
 
 -   Building the functions
 
-    -   Function 1: Spatial Point Patterns for Hawker Centres in SG:
+    -   **Module 1: 1st Order Analysis - Density and Distribution of Hawker Centres**
         -   Map Creation: Develop a map displaying all hawker centres in Singapore.
-        -   Regional Analysis: Highlight regions with a higher concentration of hawker centres.
+
+        -   KDE 1st Order Analysis: Perform Kernel Density Estimation (KDE) to analyze the density and distribution of hawker centres across Singapore.
+
         -   Regional Maps: Provide individual maps for each region to further analyze hawker centre distribution.
+
         -   Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred region for hawker centre exploration.
-    -   Function 2: Spatial Point Patterns for Hawker Centre Food Based on Type of Food:
-        -   Food Type Map: Create a map illustrating the types of food available at hawker centres, categorising them based on cuisine types. This includes specific dietary options such as halal, vegan, etc.
-        -   User Input: Develop a Shiny app interface for users to input their preferred food types and dietary preferences, allowing for personalised food recommendations.
-    - Function 3: Spatial Point Patterns for Hawker Centre Food Based on nearby MRT station:
-        -   Region Map around selected MRT: Develop a map indicating hawker centres with near a chosen MRT station (e.g. Bedok MRT station)
-        - User Preferences: Enable users to input their preferred MRT station through a Shiny app, ensuring personalized recommendations aligned with their dietary restriction.
+    -   **Module 2: 2nd Order Analysis - Hawker Centre Proximity**
+        -   Spatial Clustering Analysis: Perform spatial clustering analysis to identify clusters of hawker centres based on proximity.
+        -   Distance Calculation: Calculate the distances between hawker centres within each cluster to assess how closely they are grouped together.
+        -   Visualization: Visualize the clustering results on a map to illustrate the spatial distribution and proximity of hawker centres.
+        -   Interpretation: Interpret the clustering patterns to understand the spatial relationships between hawker centres and identify areas with high and low concentrations.
+        -   Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred region for hawker centre exploration.
+    -   **Module 3: Geographic Accessibility Modeling of Hawker Centres**
+        -   MRT Station Selection: Allow users to select their preferred MRT station as a reference point for geographic accessibility analysis.
+        -   Buffer Creation: Create buffer zones around the selected MRT station to represent areas of influence or accessibility.
+        -   Hawker Centre Identification: Identify hawker centres located within the buffer zones to assess their accessibility from the chosen MRT station.
+        -   Distance Calculation: Calculate the distances between the selected MRT station and nearby hawker centres to quantify accessibility.
+        -   Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred MRT station for hawker centre exploration, and it's accessibility to nearby hawker centres.
 
 ### Benefits:
 

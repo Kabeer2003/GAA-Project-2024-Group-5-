@@ -159,22 +159,28 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li><p>Building the functions</p>
 <ul>
-<li>Function 1: Spatial Point Patterns for Hawker Centres in SG:
+<li><strong>Module 1: 1st Order Analysis - Density and Distribution of Hawker Centres</strong>
 <ul>
-<li>Map Creation: Develop a map displaying all hawker centres in Singapore.</li>
-<li>Regional Analysis: Highlight regions with a higher concentration of hawker centres.</li>
-<li>Regional Maps: Provide individual maps for each region to further analyze hawker centre distribution.</li>
+<li><p>Map Creation: Develop a map displaying all hawker centres in Singapore.</p></li>
+<li><p>KDE 1st Order Analysis: Perform Kernel Density Estimation (KDE) to analyze the density and distribution of hawker centres across Singapore.</p></li>
+<li><p>Regional Maps: Provide individual maps for each region to further analyze hawker centre distribution.</p></li>
+<li><p>Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred region for hawker centre exploration.</p></li>
+</ul></li>
+<li><strong>Module 2: 2nd Order Analysis - Hawker Centre Proximity</strong>
+<ul>
+<li>Spatial Clustering Analysis: Perform spatial clustering analysis to identify clusters of hawker centres based on proximity.</li>
+<li>Distance Calculation: Calculate the distances between hawker centres within each cluster to assess how closely they are grouped together.</li>
+<li>Visualization: Visualize the clustering results on a map to illustrate the spatial distribution and proximity of hawker centres.</li>
+<li>Interpretation: Interpret the clustering patterns to understand the spatial relationships between hawker centres and identify areas with high and low concentrations.</li>
 <li>Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred region for hawker centre exploration.</li>
 </ul></li>
-<li>Function 2: Spatial Point Patterns for Hawker Centre Food Based on Type of Food:
+<li><strong>Module 3: Geographic Accessibility Modeling of Hawker Centres</strong>
 <ul>
-<li>Food Type Map: Create a map illustrating the types of food available at hawker centres, categorising them based on cuisine types. This includes specific dietary options such as halal, vegan, etc.</li>
-<li>User Input: Develop a Shiny app interface for users to input their preferred food types and dietary preferences, allowing for personalised food recommendations.</li>
-</ul></li>
-<li>Function 3: Spatial Point Patterns for Hawker Centre Food Based on nearby MRT station:
-<ul>
-<li>Region Map around selected MRT: Develop a map indicating hawker centres with near a chosen MRT station (e.g.&nbsp;Bedok MRT station)</li>
-<li>User Preferences: Enable users to input their preferred MRT station through a Shiny app, ensuring personalized recommendations aligned with their dietary restriction.</li>
+<li>MRT Station Selection: Allow users to select their preferred MRT station as a reference point for geographic accessibility analysis.</li>
+<li>Buffer Creation: Create buffer zones around the selected MRT station to represent areas of influence or accessibility.</li>
+<li>Hawker Centre Identification: Identify hawker centres located within the buffer zones to assess their accessibility from the chosen MRT station.</li>
+<li>Distance Calculation: Calculate the distances between the selected MRT station and nearby hawker centres to quantify accessibility.</li>
+<li>Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred MRT station for hawker centre exploration, and it’s accessibility to nearby hawker centres.</li>
 </ul></li>
 </ul></li>
 </ul>
