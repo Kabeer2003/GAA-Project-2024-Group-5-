@@ -29,11 +29,11 @@ Culinary Crossroads aims to utilize spatial point patterns to enhance exploratio
         -   Regional Maps: Provide individual maps for each region to further analyze hawker centre distribution.
         -   Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred region for hawker centre exploration.
     -   Function 2: Spatial Point Patterns for Hawker Centre Food Based on Type of Food:
-        -   Food Type Map: Create a map illustrating the types of food available at hawker centres, categorising them based on cuisine types.
-        -   User Input: Develop a Shiny app interface for users to input their preferred food types, allowing for personalised food recommendations.
-    -   Function 3: Spatial Point Patterns for Hawker Centre Food Based on Dietary Preferences:
-        -   Dietary Options Map: Develop a map indicating hawker centres with specific dietary options such as halal, vegan, etc.
-        -   User Preferences: Enable users to input their dietary preferences through a Shiny app, ensuring personalized recommendations aligned with their dietary restrictions.
+        -   Food Type Map: Create a map illustrating the types of food available at hawker centres, categorising them based on cuisine types. This includes specific dietary options such as halal, vegan, etc.
+        -   User Input: Develop a Shiny app interface for users to input their preferred food types and dietary preferences, allowing for personalised food recommendations.
+    - Function 3: Spatial Point Patterns for Hawker Centre Food Based on nearby MRT station:
+        -   Region Map around selected MRT: Develop a map indicating hawker centres with near a chosen MRT station (e.g. Bedok MRT station)
+        - User Preferences: Enable users to input their preferred MRT station through a Shiny app, ensuring personalized recommendations aligned with their dietary restrictions.
 
 ### Benefits:
 
