@@ -40,8 +40,8 @@ ui <- fluidPage(
   # Application title
   titlePanel("Culinary Crossroads"),
   
-  #MODULE 1 (DO NOT DELETE OR EDIT)
   tabsetPanel(
+    #MODULE 1 (DO NOT DELETE OR EDIT)
     tabPanel("Hawker Centre Distribution",
              h1("1st Order Analysis - Density and Distribution of Hawker Centers"),
              # Add UI elements for page 1
