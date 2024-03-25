@@ -5,6 +5,8 @@ website:
   title: "GAA Project Group 5"
   navbar:
     left:
+      - text: "About"
+        href: "about.html"
       - text: "Project Proposal"
         href: "Proposal/proposal.html"
       - text: "Hawker Centre Distribution"

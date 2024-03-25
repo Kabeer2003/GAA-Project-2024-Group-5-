@@ -12,12 +12,26 @@ execute:
   freeze: true
 ---
 
-About this site:
+Our dedicated Professor:
 
-About the team:
+Prof. Kam Tin Seong
+
+![](images/clipboard-3152661840.png)
+
+About us:
 
 Aidan
 
+![](images/aidan-01.jpg){width="245"}
+
 Kabeer
 
+![](images/kabeer.jpg){width="250"}
+
 Gerald
+
+![](images/clipboard-1032395053.png)
+
+Paul
+
+![](images/paulwavinghello.jpg){width="266"}
