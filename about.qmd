@@ -12,26 +12,32 @@ execute:
   freeze: true
 ---
 
-Our dedicated Professor:
+**Our dedicated Professor:**
 
 Prof. Kam Tin Seong
 
 ![](images/clipboard-3152661840.png)
 
-About us:
+**About the team:**
 
 Aidan
 
-![](images/aidan-01.jpg){width="245"}
+-   <div>
+
+    ![](images/aidan-01.jpg){width="245"}
+
+    </div>
 
 Kabeer
 
-![](images/kabeer.jpg){width="250"}
+-   <div>
+
+    ![](images/kabeer.jpg){width="250"}
+
+    </div>
 
 Gerald
 
-![](images/clipboard-1032395053.png)
+-   ![](images/clipboard-1032395053.png)
 
 Paul
-
-![](images/paulwavinghello.jpg){width="266"}
