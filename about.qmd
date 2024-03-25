@@ -3,41 +3,43 @@ title: "GAA Group 5: About"
 
 authors: Aidan, Gerald, Kabeer
 date: "`r Sys.Date()`"
-
-execute: 
-  eval: true
-  echo: true
-  message: false
-  warning: false
-  freeze: true
+output:
+  html_document:
+    toc: true
+    code_folding: hide
 ---
 
-**Our dedicated Professor:**
+**About Us:**
 
-Prof. Kam Tin Seong
+```{r, echo=FALSE}
+# Load the necessary library
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
 
-![](images/clipboard-3152661840.png)
+# Define the team members and their respective picture paths
+prof <- "**Prof Kam**"
+prof_picture_paths <- c("PersonalPics/Prof.jpg")
 
-**About the team:**
+# Create a data frame with team members and picture paths
+prof_df <- data.frame(Prof = prof, Picture = prof_picture_paths)
 
-Aidan
+# Add HTML image tags to display pictures in the table
+prof_df$Picture <- sprintf('<img src="%s" height="200">', prof_df$Picture)
 
--   <div>
+# Print the table
+knitr::kable(prof_df, caption = "**Our Dedicated Prof**", escape = FALSE)
 
-    ![](images/aidan-01.jpg){width="245"}
+# Define the team members and their respective picture paths
+team <- c("**Aidan**", "**Kabeer**", "**Gerald**", "**Paul**")
+picture_paths <- c("PersonalPics/Aidan.jpg", "PersonalPics/Kabeer.jpg", "PersonalPics/Gerald.jpg", "PersonalPics/Paul.jpg")
 
-    </div>
+# Create a data frame with team members and picture paths
+team_df <- data.frame(Team_Members = team, Picture = picture_paths)
 
-Kabeer
+# Add HTML image tags to display pictures in the table
+team_df$Picture <- sprintf('<img src="%s" height="200">', team_df$Picture)
 
--   <div>
+# Print the table
+knitr::kable(team_df, caption = "**Our Team Members**", escape = FALSE)
 
-    ![](images/kabeer.jpg){width="250"}
-
-    </div>
-
-Gerald
-
--   ![](images/clipboard-1032395053.png)
-
-Paul
+```

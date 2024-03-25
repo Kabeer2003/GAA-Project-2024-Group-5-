@@ -1,9 +1,672 @@
 ---
-title: "Module 1: 1st Order Analysis - Density and Distribution of Hawker Centres"
+title: "Hawker Centre Distribution using 1st Order Analysis"
 author: "Gerald Lim"
-
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    code_echo: false
+format: 
+  html: 
+    code-fold: true
+    code-summary: "Show the code"
+    toc-depth: 4
 execute:
   warning: false
   freeze: false
-date: "`r Sys.Date()`"
 ---
+
+## **Objectives**
+
+Prototyping Modules for Geospatial Analytics Shiny Application involves selecting the "1st Order Analysis - Density and Distribution of Hawker Centres" module and completing tasks such as:
+
+-   Evaluating R packages compatibility
+
+-   Testing R codes for expected outputs
+
+-   Determining parameters and outputs for the Shiny application
+
+-   Selecting suitable Shiny UI components to expose these parameters.
+
+## **1 Install Packages**
+
+Installing the required tools for the analysis:
+
+-   **sf**: Package for importing, managing, and processing vector-based geospatial data efficiently.
+
+-   **spatstat**: Package for analyzing spatial point pattern data, including spatial statistics and point process modeling.
+
+-   **raster**: Package for working with raster (gridded) spatial data, enabling analysis and visualization of spatial phenomena.
+
+-   **maptools**: Package providing tools for reading, writing, and manipulating spatial data in various formats, enhancing interoperability between different geospatial data sources.
+
+-   **tmap**: Package for creating thematic maps and visualizations of spatial data, offering an intuitive interface and flexible options for customization
+
+-   **readr**: R package that provides fast and friendly functions for reading structured text data, including CSV files
+
+```{r}
+pacman::p_load(maptools, sf, raster, spatstat, tmap, readr)
+```
+
+## 2 Data Import and Wrangling
+
+This is where we import the data and prepare it before analysis.
+
+Let's use st_read() of sf package to import these 3 geospatial data sets into R. And we will be using other functions to prepare our data upon importing them.
+
+The data sets are:
+
+-   **updated_hawker_centres**: shows the postal code, latitude and longitude of all hawker centres in Singapore
+
+-   **MP14_SUBZONE_WEB_PL**: polygon feature data providing information of URA 2014 Master Plan Planning Subzone boundary data. It is in ESRI shapefile format. This data set was also downloaded from Data.gov.sg.
+
+-   **CoastalOutline**: a polygon feature data showing the national boundary of Singapore. It is provided by SLA and is in ESRI shapefile format.
+
+### 2.1 Import subzone **dataset**
+
+We will use st_read() of sf package to import the MP14_SUBZONE_WEB_PL dataset into R
+
+```{r}
+mpsz_sf <- st_read(dsn = "data/geospatial", 
+                layer = "MP14_SUBZONE_WEB_PL")
+```
+
+Let's check mpsz_sf
+
+```{r}
+st_crs(mpsz_sf)
+```
+
+Let's plot it to take a look
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tm_shape(mpsz_sf) +   
+  tm_polygons()
+```
+
+Ok, now we have a map of Singapore, which we will be using to plot the hawker centres in the future steps.
+
+### 2.2 Import hawker centre data
+
+Next, we will import our updated_hawker_centres into R
+
+```{r}
+hawker_centre_sf <- read_csv("data/aspatial/updated_hawker_centres.csv")
+```
+
+Let's check the sf type for hawker_centre_sf
+
+```{r}
+st_crs(hawker_centre_sf)
+```
+
+Since hawker_centre_sf does not have a Coordinate Reference System, that means it is not a spatial dataframe.
+
+Now, we have to convert hawker_centre_sf to a spatial dataframe using st_as_sf method
+
+```{r}
+# Convert hawker_centre_sf to sf object
+hawker_centre_sf <- st_as_sf(hawker_centre_sf, coords = c("Longitude", "Latitude"), crs = 4326)
+```
+
+Let's check again
+
+```{r}
+st_crs(hawker_centre_sf)
+```
+
+### 2.3 Import **CoastalOutline dataset**
+
+Next, we will import our CoastalOutline into R
+
+```{r}
+sg_sf <- st_read(dsn = "data/", 
+                layer = "CostalOutline")
+```
+
+Let's check sg_sf
+
+```{r}
+st_crs(sg_sf)
+```
+
+The crs information isn’t consistent as hawker_centre_sf is in WGS84, while the 'sg_sf" and 'mpsz_sf' are in SVY21
+
+```{r}
+target_crs = st_crs(sg_sf)
+hawker_centre_sf <- st_transform(hawker_centre_sf, target_crs)
+st_crs(hawker_centre_sf)
+```
+
+Let's plot sg_sf to see how it looks like
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tm_shape(sg_sf) +   
+  tm_polygons()
+```
+
+We can see that sg_sf includes the outlying islands of Singapore, where there are no hawker centers. Therefore, we will remove those outlying islands from sg_sf dataset.
+
+```{r}
+main_island_name <- "SINGAPORE - MAIN ISLAND"
+
+# Filter out the main island from sg_sf based on the COSTAL_NAM column
+sg_sf <- sg_sf[sg_sf$COSTAL_NAM == main_island_name, ]
+```
+
+Now, let's check sg_sf again.
+
+```{r}
+tmap_options(check.and.fix = TRUE)
+tm_shape(sg_sf) +   
+  tm_polygons()
+```
+
+We have successfully removed the outlying island, and now sg_sf consist of just the mainland. We will have to ensure that mpsz_sf follows the same. So, we will perform a st_intersection for mpsz_sf and sg_sf so that mpsz_sf will only show the mainland of Singapore (which is our focus area of this project).
+
+```{r}
+mpsz_sf <- st_intersection(mpsz_sf, sg_sf)
+st_crs(mpsz_sf)
+```
+
+### 2.4 Visualise mpsz_sf and hawker_centre_sf datasets
+
+Let's plot both mpsz_sf and hawker_centre_sf datasets using tmap to see the hawker centres points on the map
+
+```{r}
+tm_shape(mpsz_sf) +
+  tm_borders() +
+  tm_fill("lightgrey") +
+  tm_layout(title = "Map of Singapore with Hawker Centres") +
+# Add the hawker_centre_sf layer
+tm_shape(hawker_centre_sf) +
+  tm_bubbles(size = 0.2, col = "red")
+```
+
+Now that we can see the hawker centres (represented by red dots) on the map, we will proceed to doing the necessary preparation for our 1st Order Analysis model.
+
+### 2.5 Convert sf data frames to sp's Spatial class
+
+We have to convert our datasets to sp's spatial class type by using
+
+```{r}
+mpsz <- as_Spatial(mpsz_sf)
+hawker_centre <- as_Spatial(hawker_centre_sf)
+```
+
+Let's take a look at our newly created spatial classes
+
+```{r}
+mpsz
+```
+
+```{r}
+hawker_centre
+```
+
+### 2.6 Convert spatial class to sp type
+
+As the spatial classes are created successfully, we will proceed to converting them into sp type. As spatstat requires data to be in ppp object form, we will have to convert our spatial classes into sp type (sp objects) first. So, we will convert our hawker_centre spatial class into sp type.
+
+```{r}
+hawker_centre_sp <- as(hawker_centre, "SpatialPoints")
+```
+
+Let's take a look at the hawker_centre_sp and sg_sp
+
+```{r}
+hawker_centre_sp
+```
+
+### 2.7 Convert sp type to ppp type
+
+As mentioned earlier, we will have to convert our sp type for hawker_centre_sp to ppp type
+
+```{r}
+hawker_centre_ppp <- as.ppp(hawker_centre_sp)
+hawker_centre_ppp
+```
+
+Let's plot the hawker_centre_ppp and visualise it
+
+```{r}
+plot(hawker_centre_ppp)
+```
+
+```{r}
+class(mpsz)
+
+```
+
+### 2.8 Create owin object
+
+We will create an owin object so that we can ensure our analysis is within Singapore. We will create an owin object using mpsz.
+
+```{r}
+mpsz_owin <- as.owin(as(mpsz, "SpatialPolygons"))
+mpsz_owin
+```
+
+Let's plot mpsz_owin and visualise it.
+
+```{r}
+plot(mpsz_owin)
+```
+
+### 2.9 Combine ppp with owin object
+
+Now that we have created our hawker_centre_ppp and mpsz_owin objects, we will combine them and to make sure all our points in hawker_centre_ppp are within the mpsz_owin.
+
+```{r}
+# Plot the PPP on the sg_owin window
+hawker_centre_SG_ppp = hawker_centre_ppp[mpsz_owin]
+plot(hawker_centre_SG_ppp)
+```
+
+Now, we can see all the hawker centres which are plotted on the Singapore Map in our newly created hawker_centre_SG_ppp.
+
+## 3 **First-order Spatial Point Patterns Analysis (1st Order Analysis)**
+
+This is where the magic happens.
+
+### 3.1 Kernel Density Estimation (KDE)
+
+We will be computing the KDE of hawker centres in Singapore.
+
+#### 3.1.1 Computing KDE using automatic bandwidth selection method
+
+We will convert the range type to km
+
+```{r}
+#| eval: false
+# Convert the coordinates of hawker_centre_SG_ppp to a suitable CRS using kilometers
+hawker_centre_SG_ppp_km <- rescale(hawker_centre_SG_ppp, 1000, "km")
+```
+
+Let's keep kde_hawker_centre_bw_km in our rds for easy reference in the future. So as to save time in the future when we are performing our analysis.
+
+```{r}
+#| eval: false 
+write_rds(hawker_centre_SG_ppp_km, "data/rds/hawker_centre_SG_ppp_km")
+```
+
+Retrieve kde_hawker_centre_bw_km from rds.
+
+```{r}
+hawker_centre_SG_ppp_km <- read_rds("data/rds/hawker_centre_SG_ppp_km")
+```
+
+Now, We will use the density() method to get the KDE
+
+```{r}
+#| eval: false
+# Perform kernel density estimation with the specified bandwidth and kernel
+kde_hawker_centre_bw_km <- density(hawker_centre_SG_ppp_km,
+                                    sigma = bw.diggle,
+                                    edge=TRUE,
+                                    kernel = "gaussian") 
+```
+
+Let's keep kde_hawker_centre_bw_km in our rds for easy reference in the future. So as to save time in the future when we are performing our analysis.
+
+```{r}
+#| eval: false 
+write_rds(kde_hawker_centre_bw_km, "data/rds/kde_hawker_centre_bw_km")
+```
+
+Retrieve kde_hawker_centre_bw_km from rds.
+
+```{r}
+kde_hawker_centre_bw_km <- read_rds("data/rds/kde_hawker_centre_bw_km")
+```
+
+Let's plot kde_hawker_centre_bw_km and visualise it
+
+```{r}
+plot(kde_hawker_centre_bw_km)
+```
+
+As you can see from the map above, we can see that there is a higher density of hawker centers in the southern region of Singapore, which is in the Central Business District (CBD), followed by the Eastern side (along the East Coast region of Singapore), and the Central region of Singapore. There are other regions in the West and North where we could see a smaller density of hawker centers.
+
+Firstly,We will zoom into the different kernel types in the next few steps.
+
+When kernel is gaussian type
+
+```{r}
+plot(density(hawker_centre_SG_ppp_km, 
+             sigma=bw.ppl, 
+             edge=TRUE, 
+             kernel="gaussian"), 
+     main="Gaussian")
+```
+
+When kernel is epanechnikov type
+
+```{r}
+
+plot(density(hawker_centre_SG_ppp_km, 
+             sigma=bw.ppl, 
+             edge=TRUE, 
+             kernel="epanechnikov"), 
+     main="Epanechnikov")
+```
+
+When kernel is quartic type
+
+```{r}
+plot(density(hawker_centre_SG_ppp_km, 
+             sigma=bw.ppl, 
+             edge=TRUE, 
+             kernel="quartic"), 
+     main="Quartic")
+```
+
+When kernel is disc type
+
+```{r}
+plot(density(hawker_centre_SG_ppp_km, 
+             sigma=bw.ppl, 
+             edge=TRUE, 
+             kernel="disc"), 
+     main="Disc")
+```
+
+Point to note:
+
+**For our shiny app, we will allow users to choose their preferred [Kernel type]{.underline} and they are:**
+
+1.  **Gaussian kernel:**
+
+    -   Density is highest at the center of each data point.
+
+    -   Density gradually decreases as you move away.
+
+    -   It's like a smooth hill around each point.
+
+2.  **Epanechnikov kernel:**
+
+    -   Density forms a bowl shape around each data point.
+
+    -   Focuses more on points close to the center.
+
+    -   It's like a shallow bowl where nearby points matter more.
+
+3.  **Quartic kernel:**
+
+    -   Similar to the Epanechnikov, but with a smoother curve.
+
+    -   Still focused on each data point.
+
+    -   Resembles a rounded mound where nearby points influence density.
+
+4.  **Disc kernel:**
+
+    -   Creates a circle around each data point.
+
+    -   All points within the circle contribute equally to density.
+
+    -   It's like spreading paint around each point with no preference for distance.
+
+```{r}
+# Identify duplicated points
+duplicated_points <- hawker_centre_SG_ppp_km[duplicated(hawker_centre_SG_ppp_km), ]
+
+# Remove duplicated points
+hawker_centre_SG_ppp_km <- unique(hawker_centre_SG_ppp_km)
+
+summary(hawker_centre_SG_ppp_km)
+```
+
+#### 3.1.2 Computing KDE using manual bandwidth (sigma)
+
+We will try to set sigma to 0.6 and 1.2, which represents 600m and 1.2km respectively.
+
+```{r}
+plot(density(hawker_centre_SG_ppp_km, 
+             sigma=0.6, 
+             edge=TRUE, 
+             kernel="disc"), 
+     main="sigma=0.6")
+```
+
+```{r}
+plot(density(hawker_centre_SG_ppp_km, 
+             sigma=1.2, 
+             edge=TRUE, 
+             kernel="disc"), 
+     main="sigma=0.6")
+```
+
+Point to note:
+
+**For our shiny app, we will allow users to choose their preferred [sigma (bandwidth)]{.underline}**:
+
+-   Example: 0.3, 0.6, 1.2, etc
+
+### 3.2 Comparing Spatial Point Patterns using KDE
+
+We will be exploring the different spatial point patterns of each areas and region using KDE.
+
+#### 3.2.1 Computing KDE of different areas (planning areas)
+
+We will check the number of unique planning areas, PLN_AREA_N, in our mpsz_sf.
+
+```{r}
+num_planning_areas <- length(unique(mpsz$PLN_AREA_N))
+print(num_planning_areas)
+```
+
+We will also look at the list of planning areas
+
+```{r}
+planning_areas <- unique(mpsz$PLN_AREA_N)
+print(planning_areas)
+```
+
+Now, we know that there are 55 regions, which the users can choose from in Shiny app.
+
+Let's test some of it and visualize it
+
+```{r}
+amk = mpsz[mpsz@data$PLN_AREA_N == "ANG MO KIO",]
+tm = mpsz[mpsz@data$PLN_AREA_N == "TAMPINES",]
+dt = mpsz[mpsz@data$PLN_AREA_N == "DOWNTOWN CORE",]
+```
+
+Let's plot and see
+
+```{r}
+par(mfrow=c(2,2))
+plot(amk, main = "Ang Mo Kio")
+plot(tm, main = "Tampines")
+plot(dt, main = "Downtown")
+```
+
+We will convert them into spatialpolygonsdataframe
+
+```{r}
+amk_sp = as(amk, "SpatialPolygons")
+tm_sp = as(tm, "SpatialPolygons")
+dt_sp = as(dt, "SpatialPolygons")
+```
+
+We will create the owin object
+
+```{r}
+amk_owin = as(amk_sp, "owin")
+tm_owin = as(tm_sp, "owin")
+dt_owin = as(dt_sp, "owin")
+```
+
+Combine them with the hawker centre points into a ppp
+
+```{r}
+hawker_centre_amk_ppp = hawker_centre_ppp[amk_owin]
+hawker_centre_tm_ppp = hawker_centre_ppp[tm_owin]
+hawker_centre_dt_ppp = hawker_centre_ppp[dt_owin]
+```
+
+We have to rescale it to the unit of measurement to km
+
+```{r}
+hawker_centre_amk_ppp_km = rescale(hawker_centre_amk_ppp, 1000, "km")
+hawker_centre_tm_ppp_km = rescale(hawker_centre_tm_ppp, 1000, "km")
+hawker_centre_dt_ppp_km = rescale(hawker_centre_dt_ppp, 1000, "km")
+```
+
+Let's plot and see
+
+```{r}
+par(mfrow=c(2,2))
+plot(hawker_centre_amk_ppp_km, main="Ang Mo Kio")
+plot(hawker_centre_tm_ppp_km, main="Tampines")
+plot(hawker_centre_dt_ppp_km, main="Downntown")
+```
+
+Now, it is time for the KDE
+
+```{r}
+par(mfrow=c(2,2))
+plot(density(hawker_centre_amk_ppp_km, 
+             sigma=0.25, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="Ang Mo Kio")
+plot(density(hawker_centre_tm_ppp_km, 
+             sigma=0.25, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="Tampines")
+plot(density(hawker_centre_dt_ppp_km, 
+             sigma=0.25, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="Downtown")
+```
+
+#### 3.2.2 Computing KDE of different regions
+
+We will check the number of unique planning area (or region), REGION_N, in our mpsz_sf.
+
+```{r}
+num_regions <- length(unique(mpsz$REGION_N)) 
+print(num_regions)
+```
+
+We will also look at the list of planning areas
+
+```{r}
+regions <- unique(mpsz$REGION_N) 
+print(regions)
+```
+
+Now, we know that there are 55 regions, which the users can choose from in Shiny app.
+
+Let's test some of it and visualize it
+
+```{r}
+central = mpsz[mpsz@data$REGION_N == "CENTRAL REGION",] 
+east = mpsz[mpsz@data$REGION_N == "EAST REGION",] 
+north = mpsz[mpsz@data$REGION_N == "NORTH REGION",]
+```
+
+Let's plot and see
+
+```{r}
+par(mfrow=c(2,2))
+plot(central, main = "Central")
+plot(east, main = "East")
+plot(north, main = "North")
+```
+
+We will convert them into spatialpolygonsdataframe
+
+```{r}
+central_sp = as(central, "SpatialPolygons") 
+east_sp = as(east, "SpatialPolygons") 
+north_sp = as(north, "SpatialPolygons")
+```
+
+We will create the owin object
+
+```{r}
+central_owin = as(central_sp, "owin") 
+east_owin = as(east_sp, "owin") 
+north_owin = as(north_sp, "owin")
+```
+
+Combine them with the hawker centre points into a ppp
+
+```{r}
+hawker_centre_central_ppp = hawker_centre_ppp[central_owin] 
+hawker_centre_east_ppp = hawker_centre_ppp[east_owin] 
+hawker_centre_north_ppp = hawker_centre_ppp[north_owin]
+```
+
+We have to rescale it to the unit of measurement to km
+
+```{r}
+hawker_centre_central_ppp_km = rescale(hawker_centre_central_ppp, 1000, "km") 
+hawker_centre_east_ppp_km = rescale(hawker_centre_east_ppp, 1000, "km") 
+hawker_centre_north_ppp_km = rescale(hawker_centre_north_ppp, 1000, "km")
+```
+
+Let's plot and see
+
+```{r}
+par(mfrow=c(2,2)) 
+plot(hawker_centre_central_ppp_km, main="Central") 
+plot(hawker_centre_east_ppp_km, main="East") 
+plot(hawker_centre_north_ppp_km, main="North")
+```
+
+Now, it is time for the KDE
+
+```{r}
+par(mfrow=c(2,2))
+plot(density(hawker_centre_central_ppp_km, 
+             sigma=0.25, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="Central")
+plot(density(hawker_centre_east_ppp_km, 
+             sigma=0.25, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="East")
+plot(density(hawker_centre_north_ppp_km, 
+             sigma=0.25, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="North")
+```
+
+We can see that there is a higher density of hawker centres in the Central region.
+
+## 4 Shiny App Parameters
+
+### 4.1 Parameters that will be used
+
+In our **shiny app**, we will allow our users to select the **different regions**, of which they could do the comparison on their own.
+
+These will be the parameters for our shiny app.
+
+**IN SUMMARY for our Shiny App, we will allow our users to provide input for:**
+
+-   Sigma (or bandwidth): Users can enter their preferred bandwidth (on a scale)
+
+-   Kernel: Users can choose the type of kernel type (e.g. Gaussian, Epanechnikov, Quartic, Disc)
+
+-   Location: Users can choose a specific location (planning area) that they would wish to analyse (e.g. Ang Mo Kio, Downtown)
+
+-   Region: Users can choose a specific region that they would wish to analyse (e.g. NORTH, EAST, NORTH-EAST, CENTRAL, WEST)
+
+Note: Region and Location are different. However, we would look into the possibility of allow users to filter region (without choosing a Location), and also allowing them to choose a location through a region should they wish to analyse a specific location.
+
+### 4.2 Prototype 1.0 on shinyapp
+
+The shinyapp for this particular module is completed and it can be accessed via this [link](https://geraldlimjw.shinyapps.io/HawkerCtrDistribution/)
+
+The shinyapp for this collaborative project (including all modules) can be accessed via this [link](https://geraldlimjw.shinyapps.io/CulinaryCrossroads/)
