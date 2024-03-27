@@ -11,6 +11,12 @@ output:
 
 **About Us:**
 
+# **Acknowledgement**
+
+We would like to extend our profound gratitude to **Professor Kam Tin Seong** for his unwavering commitment, dilligence, patience, insightful comments, and impeccable insights that have greatly enlightened us during course of this project. 🙏🏼
+
+It was a fun and enlightening time.
+
 ```{r, echo=FALSE}
 # Load the necessary library
 library(knitr)
@@ -27,7 +33,7 @@ prof_df <- data.frame(Prof = prof, Picture = prof_picture_paths)
 prof_df$Picture <- sprintf('<img src="%s" height="200">', prof_df$Picture)
 
 # Print the table
-knitr::kable(prof_df, caption = "**Our Dedicated Prof**", escape = FALSE)
+knitr::kable(prof_df, caption = "**Special Mention: Our Respected and Dedicated Prof**", escape = FALSE)
 
 # Define the team members and their respective picture paths
 team <- c("**Aidan**", "**Kabeer**", "**Gerald**", "**Paul**")

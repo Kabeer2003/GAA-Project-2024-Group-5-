@@ -1,5 +1,5 @@
 ---
-title: "Hawker Centre Distribution using 1st Order Analysis"
+title: "Hawker Centre Distribution using 1st Order Spatial Point Patterns Analysis"
 author: "Gerald Lim"
 date: "`r Sys.Date()`"
 output:
@@ -18,7 +18,7 @@ execute:
 
 ## **Objectives**
 
-Prototyping Modules for Geospatial Analytics Shiny Application involves selecting the "1st Order Analysis - Density and Distribution of Hawker Centres" module and completing tasks such as:
+Prototyping Modules for Geospatial Analytics Shiny Application involves selecting the "Distribution of Hawker Centres using 1st Order Spatial Point Patterns Analysis" module and completing tasks such as:
 
 -   Evaluating R packages compatibility
 
