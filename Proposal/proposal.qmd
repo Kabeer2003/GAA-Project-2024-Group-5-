@@ -1,5 +1,5 @@
 ---
-title: "GAA Group 5: Project Proposal"
+title: "GAA Group 5: Project Introduction"
 
 authors: Aidan, Gerald, Kabeer
 date: "`r Sys.Date()`"

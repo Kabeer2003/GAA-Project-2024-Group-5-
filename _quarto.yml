@@ -7,7 +7,7 @@ website:
     left:
       - text: "About"
         href: "about.html"
-      - text: "Project Proposal"
+      - text: "Introduction"
         href: "Proposal/proposal.html"
       - text: "Hawker Centre Distribution"
         href: "Module1/HawkerCentreDistribution.html"

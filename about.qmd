@@ -1,5 +1,5 @@
 ---
-title: "GAA Group 5: About"
+title: "GAA Group 5: About Us"
 
 authors: Aidan, Gerald, Kabeer
 date: "`r Sys.Date()`"
@@ -9,13 +9,13 @@ output:
     code_folding: hide
 ---
 
-**About Us:**
+## About Us
 
-# **Acknowledgement**
+#### **Our Team and Acknowledgement**
 
 We would like to extend our profound gratitude to **Professor Kam Tin Seong** for his unwavering commitment, dilligence, patience, insightful comments, and impeccable insights that have greatly enlightened us during course of this project. 🙏🏼
 
-It was a fun and enlightening time.
+It was a fun and enlightening time in IS415 G1.
 
 ```{r, echo=FALSE}
 # Load the necessary library
@@ -23,7 +23,7 @@ library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 
 # Define the team members and their respective picture paths
-prof <- "**Prof Kam**"
+prof <- "**Prof Kam Tin Seong**"
 prof_picture_paths <- c("PersonalPics/Prof.jpg")
 
 # Create a data frame with team members and picture paths
