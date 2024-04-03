@@ -12,7 +12,11 @@ execute:
   freeze: true
 ---
 
-We are from IS415 G1 T5 (better known as **CulinaryCrossroads**).
+## IS415-G1 GAA Group 5: Culinary Crossroads
+
+![](images/clipboard-1138812330.png)
+
+We are from IS415-G1 Group 5 (better known as **CulinaryCrossroads**).
 
 Our project uses geospatial analytics to analyze the density, distribution, proximity and accessibility of hawker centres across Singapore, providing users with personalized recommendations and insights into the vibrant culinary landscape of the city-state.
 

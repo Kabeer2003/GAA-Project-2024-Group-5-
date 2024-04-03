@@ -13,9 +13,9 @@ output:
 
 #### **Our Team and Acknowledgement**
 
-We would like to extend our profound gratitude to **Professor Kam Tin Seong** for his unwavering commitment, dilligence, patience, insightful comments, and impeccable insights that have greatly enlightened us during course of this project. 🙏🏼
+We would like to extend our profound gratitude to **Professor Kam Tin Seong** for his unwavering commitment, dilligence, patience, insightful comments, and impeccable insights that have greatly enlightened us during course of this project. ☺️
 
-It was a fun and enlightening time in IS415 G1.
+It has been a fun and enlightening time in IS415 G1.
 
 ```{r, echo=FALSE}
 # Load the necessary library
@@ -36,11 +36,11 @@ prof_df$Picture <- sprintf('<img src="%s" height="200">', prof_df$Picture)
 knitr::kable(prof_df, caption = "**Special Mention: Our Respected and Dedicated Prof**", escape = FALSE)
 
 # Define the team members and their respective picture paths
-team <- c("**Aidan**", "**Kabeer**", "**Gerald**", "**Paul**")
-picture_paths <- c("PersonalPics/Aidan.jpg", "PersonalPics/Kabeer.jpg", "PersonalPics/Gerald.jpg", "PersonalPics/Paul.jpg")
+team <- c("**Aidan**", "**Kabeer**", "**Gerald**")
+picture_paths <- c("PersonalPics/Aidan.jpg", "PersonalPics/Kabeer.jpg", "PersonalPics/Gerald.jpg")
 
 # Create a data frame with team members and picture paths
-team_df <- data.frame(Team_Members = team, Picture = picture_paths)
+team_df <- data.frame(Members = team, Picture = picture_paths)
 
 # Add HTML image tags to display pictures in the table
 team_df$Picture <- sprintf('<img src="%s" height="200">', team_df$Picture)

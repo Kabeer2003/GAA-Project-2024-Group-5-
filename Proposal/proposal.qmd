@@ -25,6 +25,9 @@ Culinary Crossroads aims to utilize spatial point patterns to enhance exploratio
 -   Building the functions
 
     -   **Module 1: 1st Order Analysis - Density and Distribution of Hawker Centres**
+
+        **\[Done by: Gerald\]**
+
         -   Map Creation: Develop a map displaying all hawker centres in Singapore.
 
         -   KDE 1st Order Analysis: Perform Kernel Density Estimation (KDE) to analyze the density and distribution of hawker centres across Singapore.
@@ -32,13 +35,21 @@ Culinary Crossroads aims to utilize spatial point patterns to enhance exploratio
         -   Regional Maps: Provide individual maps for each region to further analyze hawker centre distribution.
 
         -   Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred region for hawker centre exploration.
+
     -   **Module 2: 2nd Order Analysis - Hawker Centre Proximity**
+
+        **\[Done by: Kabeer\]**
+
         -   Spatial Clustering Analysis: Perform spatial clustering analysis to identify clusters of hawker centres based on proximity.
         -   Distance Calculation: Calculate the distances between hawker centres within each cluster to assess how closely they are grouped together.
         -   Visualization: Visualize the clustering results on a map to illustrate the spatial distribution and proximity of hawker centres.
         -   Interpretation: Interpret the clustering patterns to understand the spatial relationships between hawker centres and identify areas with high and low concentrations.
         -   Shiny App Integration: Integrate a Shiny app allowing users to indicate (input) their preferred region for hawker centre exploration.
+
     -   **Module 3: Geographic Accessibility Modeling of Hawker Centres**
+
+        **\[Done by: Aidan\]**
+
         -   MRT Station Selection: Allow users to select their preferred MRT station as a reference point for geographic accessibility analysis.
         -   Buffer Creation: Create buffer zones around the selected MRT station to represent areas of influence or accessibility.
         -   Hawker Centre Identification: Identify hawker centres located within the buffer zones to assess their accessibility from the chosen MRT station.
