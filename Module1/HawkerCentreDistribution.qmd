@@ -665,7 +665,7 @@ These will be the parameters for our shiny app.
 
 Note: Region and Location are different. However, we would look into the possibility of allow users to filter region (without choosing a Location), and also allowing them to choose a location through a region should they wish to analyse a specific location.
 
-### 4.2 Module Prototype on shinyapp 
+### 4.2 Module Prototype on shinyapp
 
 The shinyapp for this module is completed and it can be accessed via this [link](https://geraldlimjw.shinyapps.io/HawkerCtrDistribution/)
 
