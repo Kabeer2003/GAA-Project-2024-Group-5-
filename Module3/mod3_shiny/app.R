@@ -99,7 +99,20 @@ server <- function(input, output, session) {
   
   # Observer for the Go button
   observeEvent(input$goButton, {
-    req(input$accessMethod, reactive_data())  # Ensure method and data are available before plotting
+    req(input$accessMethod)  # Ensure method and data are available before plotting
+    # Load data based on access method
+    reactive_data <- reactive({
+      input_access_method <- input$accessMethod  # Store the value of input$accessMethod
+      
+      dataset <- switch(input_access_method,
+                        "Hansen" = "hexagon_Hansen_mpsz.rds",
+                        "KD2SFCA" = "hexagon_KD2SFCA_mpsz.rds",
+                        "SAM" = "hexagon_SAM_mpsz.rds")
+      
+      readRDS(file.path(data_dir, "RDS", dataset))
+    })
+    
+    req(reactive_data())  # Ensure data is available before plotting
     output$accessMap <- renderTmap({
       plot_map(reactive_data(), input$accessMethod)  # Pass the selected method to plot_map
     })
