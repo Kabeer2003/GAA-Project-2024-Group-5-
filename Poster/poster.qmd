@@ -1,0 +1,17 @@
+---
+title: "GAA Group 5: Project Poster"
+
+authors: Aidan, Gerald, Kabeer
+date: "`r Sys.Date()`"
+
+execute: 
+  eval: true
+  echo: true
+  message: false
+  warning: false
+  freeze: true
+---
+
+### Our Poster
+
+![](images/IS415 Project Poster (1) (1).jpg)

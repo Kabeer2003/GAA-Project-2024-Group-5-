@@ -9,6 +9,8 @@ website:
         href: "about.html"
       - text: "Introduction"
         href: "Proposal/proposal.html"
+      - text: "Poster"
+        href: "Poster/poster.html"
       - text: "Hawker Centre Distribution"
         href: "Module1/HawkerCentreDistribution.html"
       - text: "Hawker Centre Proximity"
