@@ -5,7 +5,6 @@ library(sp)
 library(spatstat)
 library(tmap)
 library(readr)
-getwd()
 
 # MODULE 1 DATA IMPORT (DO NOT REMOVE OR EDIT)
 data_dir <- "data/Module1_Data/rds"
@@ -31,35 +30,6 @@ hawker_centre_sp_1 <- as(hawker_centre_1, "SpatialPoints")
 data_dir <- "data/Module2_Data"
 singapore_mpsz2 <- readRDS(file.path(data_dir, "singapore_mpsz2.rds"))
 hawker_stalls_data2 <- readRDS(file.path(data_dir, "hawker_centre_pts2.rds"))
-
-# Helper functions
-plot_envelope <- function(ppp, test_type, num_sim) {
-  test_func <- switch(
-    test_type,
-    "F" = Fest,
-    "G" = Gest,
-    "K" = Kest,
-    "L" = Lest,
-    stop("Unknown test type selected")
-  )
-  
-  env_result <- envelope(ppp, fun = test_func, nsim = num_sim, verbose = FALSE)
-  
-  plot(env_result, main = paste(test_type, "Function Test"))
-  
-  if ("Hi" %in% names(env_result) && "Lo" %in% names(env_result)) {
-    r_values <- env_result$r
-    hi <- env_result$hi
-    lo <- env_result$lo
-    xvals <- c(r_values, rev(r_values))
-    yvals <- c(hi, rev(lo))
-    polygon(xvals, yvals, col = rgb(0.8, 0.8, 0.8, 0.5), border = NA)
-  }
-}
-
-find_significance_level <- function(numSim) {
-  return(2 / (1 + numSim))
-}
 
 # MODULE 3 DATA IMPORT (DO NOT REMOVE OR EDIT)
 data_dir <- "data/Module3_Data"
@@ -101,7 +71,7 @@ ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  selectInput("region2", "Select Region:", choices = c("All", unique(singapore_mpsz2$REGION_N))),
-                 selectInput("planningArea2", "Select Planning Area:", choices = c("All", unique(singapore_mpsz2$PLN_AREA_N))),
+                 uiOutput("planningArea2"),
                  textInput("dishName2", "Enter Dish Name:"),
                  numericInput("numSim2", "Number of Simulations:", value = 39, min = 1),
                  selectInput("testType2", "Select Test Type:", 
@@ -197,6 +167,45 @@ server <- function(input, output, session) {
   })
   
   #MODULE 2 BACKEND CODES 
+  # Output for dynamic location select input
+  output$planningArea2 <- renderUI({
+    region2 <- input$region2
+    if(region2 == "All") {
+      return(NULL)
+    } else {
+      locations2 <- unique(singapore_mpsz2$PLN_AREA_N[singapore_mpsz2$REGION_N == region2])
+      selectInput("planningArea2", "Select Planning Area:", choices = c("All", locations2))
+    }
+  })
+  # Helper functions
+  plot_envelope <- function(ppp, test_type, num_sim) {
+    test_func <- switch(
+      test_type,
+      "F" = Fest,
+      "G" = Gest,
+      "K" = Kest,
+      "L" = Lest,
+      stop("Unknown test type selected")
+    )
+    
+    env_result <- envelope(ppp, fun = test_func, nsim = num_sim, verbose = FALSE)
+    
+    plot(env_result, main = paste(test_type, "Function Test"))
+    
+    if ("Hi" %in% names(env_result) && "Lo" %in% names(env_result)) {
+      r_values <- env_result$r
+      hi <- env_result$hi
+      lo <- env_result$lo
+      xvals <- c(r_values, rev(r_values))
+      yvals <- c(hi, rev(lo))
+      polygon(xvals, yvals, col = rgb(0.8, 0.8, 0.8, 0.5), border = NA)
+    }
+  }
+  
+  find_significance_level <- function(numSim) {
+    return(2 / (1 + numSim))
+  }
+  
   observeEvent(input$goButton2, {
     # Retrieve inputs
     print("Button clicked, retrieving inputs...")
@@ -288,10 +297,7 @@ server <- function(input, output, session) {
     mapex <- st_bbox(data)
     
     # Determine the column to use for fill based on the selected method
-    fill_col <- switch(method,
-                       "Hansen" = "accHansen",
-                       "KD2SFCA" = "accKD2SFCA",
-                       "SAM" = "accSAM")
+    fill_col <- paste0("acc", method)
     
     # Construct the tmap plot
     tm_map <- tm_shape(data, bbox = mapex) +
@@ -308,10 +314,9 @@ server <- function(input, output, session) {
     tm_map  # Return the tmap object for rendering
   }
   
+  
   # Observer for the Go button
   observeEvent(input$goButton, {
-    req(input$accessMethod)  # Ensure accessMethod is available before proceeding
-    req(input$regionSelect, input$planningAreaSelect)  # Ensure region and planning area are selected
     # Load data based on access method
     reactive_data <- reactive({
       input_access_method <- input$accessMethod  # Store the value of input$accessMethod
@@ -323,17 +328,16 @@ server <- function(input, output, session) {
       
       readRDS(file.path(data_dir, "RDS", dataset))
     })
-    req(reactive_data())  # Ensure data is available before plotting
     # Filter data based on selected region and planning area
     filtered_data <- reactive({
       data <- reactive_data()
       region <- input$regionSelect
       planning_area <- input$planningAreaSelect
       
-      if (region != "ALL") {
+      if (!is.null(region) && region != "ALL") {
         data <- data[data$REGION_N == region, ]
       }
-      if (planning_area != "ALL") {
+      if (!is.null(planning_area) && planning_area != "ALL") {
         data <- data[data$PLN_AREA_N == planning_area, ]
       }
       
@@ -345,6 +349,7 @@ server <- function(input, output, session) {
       plot_map(filtered_data(), input$accessMethod)  # Pass the selected method to plot_map
     })
   })
+  
 }
 
 # Run the application 
