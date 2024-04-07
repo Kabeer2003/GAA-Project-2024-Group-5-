@@ -102,7 +102,7 @@ ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  selectInput("region2", "Select Region:", choices = c("All", unique(singapore_mpsz2$REGION_N))),
-                 selectInput("planningArea2", "Select Planning Area:", choices = c("All" = "All")),
+                 selectInput("planningArea2", "Select Planning Area:", choices = c("All", unique(singapore_mpsz2$PLN_AREA_N))),
                  textInput("dishName2", "Enter Dish Name:"),
                  numericInput("numSim2", "Number of Simulations:", value = 39, min = 1),
                  selectInput("testType2", "Select Test Type:", 
@@ -312,6 +312,7 @@ server <- function(input, output, session) {
   # Observer for the Go button
   observeEvent(input$goButton, {
     req(input$accessMethod)  # Ensure accessMethod is available before proceeding
+    req(input$regionSelect, input$planningAreaSelect)  # Ensure region and planning area are selected
     # Load data based on access method
     reactive_data <- reactive({
       input_access_method <- input$accessMethod  # Store the value of input$accessMethod
@@ -324,8 +325,25 @@ server <- function(input, output, session) {
       readRDS(file.path(data_dir, "RDS", dataset))
     })
     req(reactive_data())  # Ensure data is available before plotting
+    # Filter data based on selected region and planning area
+    filtered_data <- reactive({
+      data <- reactive_data()
+      region <- input$regionSelect
+      planning_area <- input$planningAreaSelect
+      
+      if (region != "ALL") {
+        data <- data[data$REGION_N == region, ]
+      }
+      if (planning_area != "ALL") {
+        data <- data[data$PLN_AREA_N == planning_area, ]
+      }
+      
+      return(data)
+    })
+    
+    # Render the map based on filtered data
     output$accessMap <- renderTmap({
-      plot_map(reactive_data(), input$accessMethod)  # Pass the selected method to plot_map
+      plot_map(filtered_data(), input$accessMethod)  # Pass the selected method to plot_map
     })
   })
 }

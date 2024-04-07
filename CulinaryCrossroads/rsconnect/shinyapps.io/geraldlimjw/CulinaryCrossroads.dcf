@@ -5,9 +5,8 @@ account: geraldlimjw
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11555299
-bundleId: 8464715
+bundleId: 8464795
 url: https://geraldlimjw.shinyapps.io/CulinaryCrossroads/
 version: 1
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: app1.R
