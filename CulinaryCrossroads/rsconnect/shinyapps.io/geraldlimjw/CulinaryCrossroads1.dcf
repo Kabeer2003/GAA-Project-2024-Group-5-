@@ -1,12 +1,12 @@
-name: CulinaryCrossroads
-title: CulinaryCrossroads
+name: CulinaryCrossroads1
+title: CulinaryCrossroads1
 username: geraldlimjw
 account: geraldlimjw
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 11555299
-bundleId:
-url: https://geraldlimjw.shinyapps.io/CulinaryCrossroads/
+appId: 11690214
+bundleId: 8464855
+url: https://geraldlimjw.shinyapps.io/CulinaryCrossroads1/
 version: 1
 asMultiple: FALSE
 asStatic: FALSE

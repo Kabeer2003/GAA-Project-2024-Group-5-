@@ -8,14 +8,13 @@ library(readr)
 getwd()
 
 # MODULE 1 DATA IMPORT (DO NOT REMOVE OR EDIT)
-mpsz_sf_1 <- st_read(dsn = "data/Module1_Data/geospatial", 
-                   layer = "MP14_SUBZONE_WEB_PL")
+data_dir <- "data/Module1_Data/rds"
+mpsz_sf_1 <- readRDS(file.path(data_dir, "mpsz.rds"))
 
-hawker_centre_sf_1 <- read_csv("data/Module1_Data/aspatial/updated_hawker_centres.csv")
+hawker_centre_sf_1 <- read.csv("data/Module1_Data/aspatial/updated_hawker_centres.csv")
 hawker_centre_sf_1 <- st_as_sf(hawker_centre_sf_1, coords = c("Longitude", "Latitude"), crs = 4326)
 
-sg_sf_1 <- st_read(dsn = "data/Module1_Data/", 
-                 layer = "CostalOutline")
+sg_sf_1 <- readRDS(file.path(data_dir, "sg.rds"))
 
 main_island_name <- "SINGAPORE - MAIN ISLAND"
 sg_sf_1 <- sg_sf_1[sg_sf_1$COSTAL_NAM == main_island_name, ]

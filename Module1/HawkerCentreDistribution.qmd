@@ -77,6 +77,14 @@ Let's check mpsz_sf
 st_crs(mpsz_sf)
 ```
 
+```{r}
+saveRDS(mpsz_sf, file = "data/rds/mpsz.rds")
+```
+
+```{r}
+mpsz_sf <- readRDS("data/rds/mpsz.rds")
+```
+
 Let's plot it to take a look
 
 ```{r}
@@ -129,6 +137,14 @@ Let's check sg_sf
 
 ```{r}
 st_crs(sg_sf)
+```
+
+```{r}
+saveRDS(sg_sf, file = "data/rds/sg.rds")
+```
+
+```{r}
+sg_sf <- readRDS("data/rds/sg.rds")
 ```
 
 The crs information isn’t consistent as hawker_centre_sf is in WGS84, while the 'sg_sf" and 'mpsz_sf' are in SVY21
