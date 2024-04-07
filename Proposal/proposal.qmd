@@ -68,3 +68,7 @@ Where can we find the data ?
 -   Singapore Open Data (data.gov.sg): Hawker Centre Locations (kml)
 -   DBS PayLah: Dataset with the list of stalls in each hawker centre
 -   Google Places API: Google Places API allows you to retrieve information about places, including restaurants. You can obtain details such as place names, addresses, ratings, and reviews.
+
+### Timeline
+
+![](images/clipboard-788612531.png){width="638"}
