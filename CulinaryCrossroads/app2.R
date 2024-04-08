@@ -5,6 +5,7 @@ library(sp)
 library(spatstat)
 library(tmap)
 library(readr)
+getwd()
 
 # MODULE 1 DATA IMPORT (DO NOT REMOVE OR EDIT)
 data_dir <- "data/Module1_Data/rds"
@@ -259,7 +260,7 @@ server <- function(input, output) {
   
   # MODULE 3 BACKEND CODES
   
- 
+  
   # Define the plot_map function to adjust based on the selected accessibility scoring method
   plot_map <- function(data, method) {
     # Set tmap to plot mode for a static plot
