@@ -100,7 +100,7 @@ ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  selectInput("region2", "Select Region:", choices = c("All", unique(singapore_mpsz2$REGION_N))),
-                 selectInput("planningArea2", "Select Planning Area:", choices = c("All", unique(singapore_mpsz2$PLN_AREA_N))),
+                 uiOutput("planningArea2"),  # Dynamic UI for planning area selection
                  textInput("dishName2", "Enter Dish Name:"),
                  numericInput("numSim2", "Number of Simulations:", value = 39, min = 1),
                  selectInput("testType2", "Select Test Type:", 
@@ -128,7 +128,7 @@ ui <- fluidPage(
                                          "KD2SFCA Method" = "KD2SFCA",
                                          "SAM Method" = "SAM")),
                  selectInput("regionSelect", "Select Region:", choices = c("All", unique(full_data$REGION_N))),
-                 selectInput("planningAreaSelect", "Select Planning Area:", choices = c("All", unique(full_data$PLN_AREA_N))),
+                 uiOutput("planningAreaSelect"),  # Dynamic UI for planning area selection
                  actionButton("goButton", "Go!")
                ),
                mainPanel(
@@ -179,12 +179,8 @@ server <- function(input, output) {
   # Output for dynamic location select input
   output$location_select <- renderUI({
     region <- input$region
-    if(region == "All") {
-      return(NULL)
-    } else {
-      locations <- unique(mpsz_sf_1$PLN_AREA_N[mpsz_sf_1$REGION_N == region])
-      selectInput("location", "Select Location:", choices = c("All", locations))
-    }
+    locations <- unique(mpsz_sf_1$PLN_AREA_N[mpsz_sf_1$REGION_N == region])
+    selectInput("location", "Select Planning Area:", choices = c("All", locations))
   })
   
   # Output for KDE plot
@@ -196,6 +192,13 @@ server <- function(input, output) {
   })
   
   #MODULE 2 BACKEND CODES 
+  # Output for dynamic location select input
+  output$planningArea2 <- renderUI({
+    region <- input$region2
+    locations <- unique(singapore_mpsz2$PLN_AREA_N[singapore_mpsz2$REGION_N == region])
+    selectInput("planningArea2", "Select Planning Area:", choices = c("All", locations))
+  })
+  
   observeEvent(input$goButton2, {
     # Retrieve inputs
     print("Button clicked, retrieving inputs...")
@@ -258,6 +261,12 @@ server <- function(input, output) {
   })
   
   # MODULE 3 BACKEND CODES
+  # Output for dynamic location select input
+  output$planningAreaSelect <- renderUI({
+    region <- input$regionSelect
+    locations <- unique(full_data$PLN_AREA_N[full_data$REGION_N == region])
+    selectInput("planningAreaSelect", "Select Location:", choices = c("All", locations))
+  })
   
  
   # Define the plot_map function to adjust based on the selected accessibility scoring method
@@ -314,10 +323,13 @@ server <- function(input, output) {
     # Filter data based on selected region and planning area
     filtered_data <- reactive({
       data <- reactive_data()
-      if (selected_region != "ALL") {
+      if (selected_region == "All") {
+        data <- data
+      }
+      if (selected_region != "All") {
         data <- data[data$REGION_N == selected_region, ]
       }
-      if (selected_planning_area != "ALL") {
+      if (selected_planning_area != "All") {
         data <- data[data$PLN_AREA_N == selected_planning_area, ]
       }
       return(data)
